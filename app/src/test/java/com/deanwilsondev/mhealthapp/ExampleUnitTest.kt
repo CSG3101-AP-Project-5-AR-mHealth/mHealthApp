@@ -1,4 +1,4 @@
-package com.deanwilsondev.mhealth
+package com.deanwilsondev.mhealthapp
 
 import org.junit.Test
 

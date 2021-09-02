@@ -7,9 +7,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:395033475870:android:19c7f34c655f0995a4e70f",
+        "mobilesdk_app_id": "1:395033475870:android:dbe7c5c723ad0e58a4e70f",
         "android_client_info": {
-          "package_name": "com.deanwilsondev.mHealth"
+          "package_name": "com.deanwilsondev.mhealth"
         }
       },
       "oauth_client": [
