@@ -18,7 +18,7 @@ const val CHANNEL_NAME = "com.deanwilsondev.mhealth"
 
 class MyFirebaseMessagingService : FirebaseMessagingService() {
 
-    // generate the notification
+    // generate the notification+
     fun generateNotification(title: String, message: String){
 
         val intent = Intent(this, MainActivity::class.java)
@@ -31,6 +31,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
             .setVibrate(longArrayOf(1000,1000,1000,1000))
             .setOnlyAlertOnce(true)
             .setContentIntent(pendingIntent)
+            .setPriority(NotificationCompat.PRIORITY_HIGH)
 
         builder = builder.setContent(getRemoteView(title, message))
 
