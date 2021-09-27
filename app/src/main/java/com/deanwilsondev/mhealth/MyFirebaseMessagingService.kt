@@ -11,6 +11,11 @@ import android.widget.RemoteViews
 import androidx.core.app.NotificationCompat
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
+import java.io.BufferedReader
+import java.io.OutputStreamWriter
+import java.net.HttpURLConnection
+import java.net.URL
+import java.net.URLEncoder
 
 const val CHANNEL_ID = "notification_channel"
 const val CHANNEL_NAME = "com.deanwilsondev.mhealth"
@@ -64,6 +69,28 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         }
 
     }
+
+    /*override fun onNewToken(token: String) {
+        super.onNewToken(token)
+        sendApiRequest(token)
+    }
+
+    fun sendApiRequest(token: String) {
+        val mURL = URL("http://127.0.0.1:8000/registration/")
+        var reqParam = URLEncoder.encode("{ \"token\": \"$token\"", "UTF-8")
+
+        with(mURL.openConnection() as HttpURLConnection) {
+            // optional default is GET
+            requestMethod = "POST"
+
+            val wr = OutputStreamWriter(getOutputStream());
+            wr.write(reqParam);
+            wr.flush();
+
+            println("URL : $url")
+            println("Response Code : $responseCode")
+        }
+    }*/
 }
 
 annotation class suppressLint(val value: String)
