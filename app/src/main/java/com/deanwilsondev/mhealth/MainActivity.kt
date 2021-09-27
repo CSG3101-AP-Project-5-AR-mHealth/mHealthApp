@@ -1,17 +1,13 @@
 package com.deanwilsondev.mhealth
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.deanwilsondev.mhealth.R
+import android.os.StrictMode
+import android.os.StrictMode.ThreadPolicy
+import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.messaging.FirebaseMessaging
 import java.io.OutputStreamWriter
-import java.net.HttpURLConnection
 import java.net.URL
-import java.net.URLEncoder
-import android.os.StrictMode
-import android.os.StrictMode.ThreadPolicy
-import android.util.Log
 import java.security.SecureRandom
 import java.security.cert.X509Certificate
 import javax.net.ssl.*
@@ -22,19 +18,26 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        var token = ""
+        sendTokenToApi()
+    }
+
+    fun sendTokenToApi(){
         FirebaseMessaging.getInstance().token
             .addOnCompleteListener(OnCompleteListener { task ->
                 if (!task.isSuccessful) {
                     return@OnCompleteListener
                 }
                 // Get new Instance ID token
-                token = task.result as String
+                val token = task.result as String
 
-                /*val policy = ThreadPolicy.Builder()
+                val policy = ThreadPolicy.Builder()
                     .permitAll().build()
                 StrictMode.setThreadPolicy(policy)
-                sendApiRequest(token)*/
+                try {
+                    sendApiRequest(token)
+                } catch (e: Exception) {
+                    // update server status here
+                }
             })
     }
 
@@ -45,7 +48,8 @@ class MainActivity : AppCompatActivity() {
         with((mURL.openConnection() as HttpsURLConnection).apply{
             sslSocketFactory = createSocketFactory(listOf("TLSv1.2"))
             hostnameVerifier = HostnameVerifier { _, _ -> true }
-            readTimeout = 1
+            readTimeout = 2_000
+            connectTimeout = 1_000
         }){
             // optional default is GET
             requestMethod = "POST"
@@ -53,9 +57,6 @@ class MainActivity : AppCompatActivity() {
             val wr = OutputStreamWriter(getOutputStream());
             wr.write(reqParam);
             wr.flush();
-
-            /*println("URL : $url")
-            println("Response Code : $responseCode")*/
         }
     }
 
