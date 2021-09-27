@@ -3,8 +3,12 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Development/Android/mHealth/app/src/main/res/drawable/ECU_background.xml" value="0.4453125" />
+        <entry key="..\:/Development/Android/mHealth/app/src/main/res/drawable/ECU_foreground.xml" value="0.4453125" />
+        <entry key="..\:/Development/Android/mHealth/app/src/main/res/drawable/ecu_background.xml" value="0.35052083333333334" />
         <entry key="..\:/Development/Android/mHealth/app/src/main/res/layout/activity_main.xml" value="0.5" />
         <entry key="..\:/Development/Android/mHealth/app/src/main/res/layout/notification.xml" value="0.334375" />
+        <entry key="..\:/Development/Android/mHealth/app/src/main/res/mipmap-anydpi-v26/ecu.xml" value="0.5755208333333334" />
       </map>
     </option>
   </component>
