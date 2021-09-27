@@ -11,6 +11,7 @@ import java.net.URL
 import java.net.URLEncoder
 import android.os.StrictMode
 import android.os.StrictMode.ThreadPolicy
+import android.util.Log
 import java.security.SecureRandom
 import java.security.cert.X509Certificate
 import javax.net.ssl.*
@@ -29,17 +30,17 @@ class MainActivity : AppCompatActivity() {
                 }
                 // Get new Instance ID token
                 token = task.result as String
-            })
 
-        val policy = ThreadPolicy.Builder()
-            .permitAll().build()
-        StrictMode.setThreadPolicy(policy)
-        sendApiRequest(token)
+                val policy = ThreadPolicy.Builder()
+                    .permitAll().build()
+                StrictMode.setThreadPolicy(policy)
+                sendApiRequest(token)
+            })
     }
 
     fun sendApiRequest(token: String) {
         val mURL = URL("https://192.168.1.107:8000/registration/")
-        var reqParam = URLEncoder.encode("{ \"token\": \"$token\"", "UTF-8")
+        var reqParam = "{ \"token\": \"$token\"}"
 
         with((mURL.openConnection() as HttpsURLConnection).apply{
             sslSocketFactory = createSocketFactory(listOf("TLSv1.2"))
