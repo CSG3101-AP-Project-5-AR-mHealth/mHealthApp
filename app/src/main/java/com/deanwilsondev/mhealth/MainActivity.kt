@@ -31,10 +31,10 @@ class MainActivity : AppCompatActivity() {
                 // Get new Instance ID token
                 token = task.result as String
 
-                val policy = ThreadPolicy.Builder()
+                /*val policy = ThreadPolicy.Builder()
                     .permitAll().build()
                 StrictMode.setThreadPolicy(policy)
-                sendApiRequest(token)
+                sendApiRequest(token)*/
             })
     }
 
@@ -45,7 +45,7 @@ class MainActivity : AppCompatActivity() {
         with((mURL.openConnection() as HttpsURLConnection).apply{
             sslSocketFactory = createSocketFactory(listOf("TLSv1.2"))
             hostnameVerifier = HostnameVerifier { _, _ -> true }
-            readTimeout = 5_000
+            readTimeout = 1
         }){
             // optional default is GET
             requestMethod = "POST"
@@ -54,8 +54,8 @@ class MainActivity : AppCompatActivity() {
             wr.write(reqParam);
             wr.flush();
 
-            println("URL : $url")
-            println("Response Code : $responseCode")
+            /*println("URL : $url")
+            println("Response Code : $responseCode")*/
         }
     }
 
