@@ -14,6 +14,7 @@ class ApiInteraction {
     companion object {
         var Ip: String = "127.0.0.1"
         var Port: String = "8000"
+        var Status: String = "Server Not Found"
 
         fun sendTokenToApi(token: String) {
             val mURL = URL("https://$Ip:$Port/registration/")
@@ -23,14 +24,21 @@ class ApiInteraction {
                 sslSocketFactory = createSocketFactory(listOf("TLSv1.2"))
                 hostnameVerifier = HostnameVerifier { _, _ -> true }
                 readTimeout = 2_000
-                connectTimeout = 1_000
+                connectTimeout = 2_000
             }){
                 // optional default is GET
                 requestMethod = "POST"
 
-                val wr = OutputStreamWriter(outputStream);
+                val wr = OutputStreamWriter(getOutputStream());
                 wr.write(reqParam);
                 wr.flush();
+
+                if(responseCode == 201) {
+                    Status = "Server Live"
+                }
+                else {
+                    Status = "Server Not Found"
+                }
             }
         }
 
