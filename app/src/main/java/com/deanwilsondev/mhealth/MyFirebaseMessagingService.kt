@@ -16,6 +16,12 @@ import java.io.OutputStreamWriter
 import java.net.HttpURLConnection
 import java.net.URL
 import java.net.URLEncoder
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
+
+import android.os.Bundle
+
+
+
 
 const val CHANNEL_ID = "notification_channel"
 const val CHANNEL_NAME = "com.deanwilsondev.mhealth"
@@ -24,10 +30,11 @@ const val CHANNEL_NAME = "com.deanwilsondev.mhealth"
 class MyFirebaseMessagingService : FirebaseMessagingService() {
 
     // generate the notification+
-    fun generateNotification(title: String, message: String){
+    fun generateNotification(title: String, message: String, heartRate: String?){
 
         val intent = Intent(this, MainActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+        intent.putExtra("heartRate", heartRate)
 
         val pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT)
 
@@ -66,9 +73,8 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
 
         if(remoteMessage.notification != null){
-            generateNotification(remoteMessage.notification!!.title!!, remoteMessage.notification!!.body!!)
+            generateNotification(remoteMessage.notification!!.title!!, remoteMessage.notification!!.body!!, remoteMessage.data.get("heartRate"))
         }
-
     }
 
     /*override fun onNewToken(token: String) {
