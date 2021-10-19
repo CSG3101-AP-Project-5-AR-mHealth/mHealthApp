@@ -14,7 +14,7 @@ class ApiInteraction {
     companion object {
         var Ip: String = "127.0.0.1"
         var Port: String = "8000"
-        var Status: String = "Server Not Found"
+        var Status: String = "Not Connected"
 
         fun sendTokenToApi(token: String) {
             val mURL = URL("https://$Ip:$Port/registration/")
@@ -34,10 +34,10 @@ class ApiInteraction {
                 wr.flush();
 
                 if(responseCode == 201) {
-                    Status = "Server Live"
+                    Status = "Connected"
                 }
                 else {
-                    Status = "Server Not Found"
+                    Status = "Server Returned Error"
                 }
             }
         }

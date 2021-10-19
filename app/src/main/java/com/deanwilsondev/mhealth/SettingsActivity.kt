@@ -16,6 +16,9 @@ class SettingsActivity : AppCompatActivity() {
 
         val portAddressEditText = findViewById<TextInputEditText>(R.id.portNumber)
         portAddressEditText.setText(ApiInteraction.Port)
+
+        val statusEditText = findViewById<TextInputEditText>(R.id.status)
+        statusEditText.setText(ApiInteraction.Status)
     }
 
     fun saveSettings() {
@@ -40,9 +43,45 @@ class SettingsActivity : AppCompatActivity() {
     }
 
     fun submit(view: android.view.View) {
+        if(validate()) {
+            return
+        }
         saveSettings()
         switchBackToMain()
     }
+
+    // validates ip address input and port input
+    fun validate(): Boolean {
+        var hasError = false
+        val ipAddressEditText = findViewById<TextInputEditText>(R.id.ipAddress)
+        val ip = ipAddressEditText.text?.toString() ?: ""
+
+        val ipPattern = "^(?:\\d{1,3}\\.){3}\\d{1,3}$"
+        val regex = Regex(ipPattern)
+        if(regex.matchEntire(ip) == null)         {
+            ipAddressEditText.error = "Not a valid ip address."
+            hasError = true
+        }
+        else  {
+            ipAddressEditText.error = null
+        }
+
+        val portAddressEditText = findViewById<TextInputEditText>(R.id.portNumber)
+        val port = portAddressEditText.text?.toString() ?: ""
+
+        val portPattern = "\\d+"
+        val portRegex = Regex(portPattern)
+        if(portRegex.matchEntire(port) == null) {
+            portAddressEditText.error = "Not a valid number."
+            hasError = true
+        }
+        else {
+            portAddressEditText.error = null
+        }
+
+        return hasError
+    }
+
     fun cancel(view: android.view.View) {
         switchBackToMain()
     }

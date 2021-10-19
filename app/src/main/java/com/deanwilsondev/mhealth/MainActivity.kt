@@ -54,7 +54,7 @@ class MainActivity : AppCompatActivity() {
                     ApiInteraction.sendTokenToApi(token)
                 } catch (e: Exception) {
                     // update server status here
-                    val a = 0
+                    ApiInteraction.Status = "Not Connected"
                 }
             })
     }

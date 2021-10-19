@@ -41,20 +41,24 @@
         app:layout_constraintTop_toBottomOf="@+id/portNumber"
         app:layout_constraintVertical_bias="1.0" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/TIL_Status"
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/status"
         android:layout_width="292dp"
         android:layout_height="38dp"
-        android:hint=""
+        android:clickable="false"
+        android:hint="Not Connected"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:cursorVisible="false"
+        android:contextClickable="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.537"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.558"
-        android:clickable="false">
+        app:layout_constraintVertical_bias="0.564">
 
-    </com.google.android.material.textfield.TextInputLayout>
+    </com.google.android.material.textfield.TextInputEditText>
 
     <TextView
         android:id="@+id/textView4"
@@ -87,6 +91,7 @@
         android:layout_width="295dp"
         android:layout_height="wrap_content"
         android:hint="80"
+        android:inputType="number"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.517"
@@ -111,6 +116,7 @@
         android:layout_width="295dp"
         android:layout_height="wrap_content"
         android:hint="192.168.0.1"
+        android:inputType="number|numberDecimal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.517"
